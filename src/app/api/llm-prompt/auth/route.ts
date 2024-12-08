@@ -20,3 +20,5 @@ export async function GET() {
 
   return NextResponse.json(authData);
 }
+
+export const dynamic = 'force-dynamic';
