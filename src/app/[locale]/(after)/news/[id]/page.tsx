@@ -9,12 +9,9 @@ import SkeletonRelatedNewsToNews from '@/components/skeleton/news/SkeletonRelate
 import SkeletonRelatedStock from '@/components/skeleton/news/SkeletonRelatedStock';
 import { getTranslations } from 'next-intl/server';
 import IntlClientProvider from '@/components/shared/IntlClientProvider';
-import { businessAPI } from '@/service/apiInstance';
 
 type NewsDetailPageProps = {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
 };
 
 export default async function NewsDetailPage({
@@ -30,7 +27,7 @@ export default async function NewsDetailPage({
         >
           <Suspense fallback={<SkeletonNewsDetail />}>
             <IntlClientProvider>
-              <NewsDetail id={params.id} />
+              <NewsDetail id={(await params).id} />
             </IntlClientProvider>
           </Suspense>
         </Wrapper>
@@ -41,7 +38,7 @@ export default async function NewsDetailPage({
               {t('stock_related_news')}
             </span>
             <Suspense fallback={<SkeletonRelatedStock />}>
-              <RelatedStock id={params.id} />
+              <RelatedStock id={(await params).id} />
             </Suspense>
           </Wrapper>
           <Wrapper padding="p-8" width="w-96">
@@ -49,7 +46,7 @@ export default async function NewsDetailPage({
               {t('related_news')}
             </span>
             <Suspense fallback={<SkeletonRelatedNewsToNews />}>
-              <RelatedNewsToNews id={params.id} />
+              <RelatedNewsToNews id={(await params).id} />
             </Suspense>
           </Wrapper>
         </div>

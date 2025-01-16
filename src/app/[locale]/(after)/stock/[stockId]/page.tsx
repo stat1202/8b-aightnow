@@ -9,9 +9,9 @@ import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
 
 type DetailProps = {
-  params: {
+  params: Promise<{
     stockId: UUID;
-  };
+  }>;
 };
 
 export default async function StockDetail({ params }: DetailProps) {
@@ -20,7 +20,7 @@ export default async function StockDetail({ params }: DetailProps) {
   return (
     <div className="flex flex-col gap-5">
       <IntlClientProvider>
-        <ChartSection stockId={params.stockId as UUID} />
+        <ChartSection stockId={(await params).stockId as UUID} />
       </IntlClientProvider>
       <NewsSection>
         <NewsHeading>{t('popular_news_today')}</NewsHeading>

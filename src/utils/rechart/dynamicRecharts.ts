@@ -1,15 +1,16 @@
-import dynamic from 'next/dynamic';
+import dynamic, { Loader } from 'next/dynamic';
+import React from 'react';
 
 type ComponentPath = 'AreaChart';
 
-function renderChart(componentPath: ComponentPath) {
-  const recharts = import('recharts');
-  const rechartsMap = {
-    AreaChart: () => recharts.then((mod) => mod.AreaChart),
-  };
+// function renderChart(componentPath: ComponentPath) {
+//   const recharts = import('recharts');
+//   const rechartsMap = {
+//     AreaChart: () => recharts.then((mod) => mod.AreaChart),
+//   };
 
-  return rechartsMap[componentPath];
-}
+//   return rechartsMap[componentPath];
+// }
 
 /**
  * 주어진 컴포넌트 경로에 따라 동적으로 Recharts 컴포넌트 Import
@@ -24,8 +25,19 @@ function renderChart(componentPath: ComponentPath) {
  * @param componentPath - 불러올 컴포넌트의 경로 문자열
  * @returns Recharts 컴포넌트를 반환하는 Promise 객체
  */
-export function dynamicImport(componentPath: ComponentPath) {
-  return dynamic(renderChart(componentPath), {
-    ssr: false,
+// 동적 로드용 컴포넌트 로더 함수
+export function renderChart(
+  componentPath: string,
+): () => Promise<React.ComponentType<any>> {
+  return async () => {
+    const myModule = await import(componentPath);
+    return myModule.default || module;
+  };
+}
+
+// 동적 import 함수
+export function dynamicImport(componentPath: string) {
+  return dynamic(() => renderChart(componentPath)(), {
+    ssr: false, // 서버 사이드 렌더링 비활성화
   });
 }

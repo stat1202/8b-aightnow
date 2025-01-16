@@ -34,7 +34,7 @@ export function useFocusTrap(isOpen: boolean) {
       if (!isModalOpen || !isTabEvent) return;
 
       const focusableElements = getFocusableElements(
-        focusRef.current,
+        focusRef.current as HTMLDivElement,
       );
       const focusabelElLen = focusableElements.length;
       // 모달 내의 포커스 가능한 요소유무 확인
@@ -80,7 +80,7 @@ export function useFocusTrap(isOpen: boolean) {
       if (!isOpenModal || isFocusInsideModal) return;
 
       const focusableElements = getFocusableElements(
-        focusRef.current,
+        focusRef.current as HTMLDivElement,
       );
       const hasFocusableElements = focusableElements.length > 0;
       if (hasFocusableElements) {

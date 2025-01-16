@@ -19,6 +19,7 @@ export default function StockIcon({
       } ${size === 'small' && 'w-12 h-12'}`}
     >
       {path ? (
+        /* eslint-disable-next-line @next/next/no-img-element */
         <img
           className=" text-grayscale-0 w-8"
           src={path}

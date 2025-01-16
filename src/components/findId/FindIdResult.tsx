@@ -5,6 +5,7 @@ import GoogleLogo from '@/assets/icons/google_logo.svg';
 import Link from 'next/link';
 import TextButton from '../shared/buttons/TextButton';
 import { useTranslations } from 'next-intl';
+import { JSX } from 'react';
 
 const socialLogo: { [key: string]: JSX.Element } = {
   kakao: <KakaoLogo className="w-6 h-6 rounded-full" />,

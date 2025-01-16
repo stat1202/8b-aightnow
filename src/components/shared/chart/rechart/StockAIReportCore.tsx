@@ -1,4 +1,4 @@
-import { useId } from 'react';
+import React, { useId } from 'react';
 import { Radar, RadarChart } from 'recharts';
 import { calculateRadii } from '@/utils/calculateRadii';
 import { generatePaths } from '@/utils/rechart/generatePaths';
@@ -15,6 +15,9 @@ import {
  * @param props - PolarGridParam 객체로 cx, cy, polarRadius, numberOfSides 속성
  * @returns 생성된 SVG path 요소들을 담은 React JSX 요소
  */
+const TypedRadarChart =
+  RadarChart as unknown as React.ComponentType<any>;
+
 function customPolarGrid<T extends PolarGridParam>(props: T) {
   const paths = generatePaths(props);
 
@@ -73,7 +76,7 @@ export default function StockAIReportCore({
   const chartId = useId();
 
   return (
-    <RadarChart
+    <TypedRadarChart
       id={chartId}
       cx={cx}
       cy={cy}
@@ -97,6 +100,6 @@ export default function StockAIReportCore({
         fill="#B2E6FA"
         fillOpacity={0.3}
       />
-    </RadarChart>
+    </TypedRadarChart>
   );
 }

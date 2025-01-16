@@ -1,13 +1,13 @@
 import { createClient } from '@/utils/supabase/server';
 import { generateResponse } from '@/utils/openai';
-import OpenAI from 'openai';
+// import OpenAI from 'openai';
 import { NextRequest, NextResponse } from 'next/server';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
 
-export async function GET(req: Request, res: Response) {
+export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const userId = searchParams.get('user_id');
 
@@ -15,7 +15,7 @@ export async function GET(req: Request, res: Response) {
   const supabase = createClient();
 
   // user_id의 데이터를 created_at 오름차순으로 조회
-  const { data: chatbotData, error } = await supabase
+  const { data: chatbotData } = await supabase
     .from('chatbot_ai')
     .select('chat_id, answer, question, status')
     .eq('user_id', userId)
@@ -61,7 +61,7 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { data: stockData, error: stockError } = await supabase
+  const { data: stockData } = await supabase
     .from('stock')
     .select('stock_name, detailed_data');
 

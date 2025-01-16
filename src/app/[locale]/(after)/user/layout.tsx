@@ -6,9 +6,7 @@ import SkeletonProfileSection from '@/components/skeleton/mypage/SkeletonProfile
 import SkeletonSidebar from '@/components/skeleton/mypage/SkeletonSidebar';
 import dynamic from 'next/dynamic';
 
-const Sidebar = dynamic(() => import('@/components/user/Sidebar'), {
-  suspense: true,
-});
+const Sidebar = dynamic(() => import('@/components/user/Sidebar'));
 
 export async function generateMetadata() {
   const t = await getTranslations('Metadata');
