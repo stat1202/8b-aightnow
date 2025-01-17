@@ -4,10 +4,29 @@ import Image from 'next/image';
 import ButtonBase from '@/components/shared/buttons/ButtonBase';
 import Mockup from '@/assets/landing/mockup.png';
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+import {
+  getTranslations,
+  unstable_setRequestLocale,
+} from 'next-intl/server';
+import { Locale } from '@/types/next-auth';
 
-export default async function Landing() {
+export async function generateStaticParams() {
+  const locales = ['en', 'fr', 'ja', 'ko', 'zh'];
+
+  return locales.map((locale) => ({
+    locale,
+  }));
+}
+
+export default async function Landing({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const locale = (await params).locale;
+  unstable_setRequestLocale(locale);
   const t = await getTranslations('Landing');
+
   return (
     <main className="flex flex-col items-center justify-end h-screen">
       <Image

@@ -24,9 +24,9 @@ export default async function LocaleLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
+  // const locale = await getLocale();
   return (
-    <html lang={locale} className={`${pretendard.variable}`}>
+    <html className={`${pretendard.variable}`}>
       <body className={`${pretendard.className}`}>
         {children}
         <div id="root-modal"></div>
