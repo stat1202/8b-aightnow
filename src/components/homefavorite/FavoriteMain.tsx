@@ -1,28 +1,25 @@
-'use client';
-
 import NotFind from '../search/NotFind';
 import FavoriteItem from './FavoriteItem';
 import { UUID } from 'crypto';
 import { businessAPI } from '@/service/apiInstance';
-import { useTranslations } from 'next-intl';
 import { Stock } from '@/types/stock';
-import { useEffect, useState } from 'react';
+import { getTranslations } from 'next-intl/server';
 
-export default function Recent({ userId }: { userId: UUID }) {
-  const [stock, setStock] = useState([]);
-  const t = useTranslations();
+export default async function FavoriteMain({
+  userId,
+}: {
+  userId: UUID;
+}) {
+  const t = await getTranslations();
   const { getInterestStock } = businessAPI;
-
-  useEffect(() => {
-    getInterestStock({
-      userId: userId as UUID,
-      page: 1,
-      size: 4,
-      next: { revalidate: 0 },
-    }).then((res) =>
-      setStock(res.map(({ stock }: { stock: Stock }) => stock)),
-    );
-  }, []);
+  const res = await getInterestStock({
+    userId: userId as UUID,
+    page: 1,
+    size: 4,
+    // next: { revalidate: 0 },
+    isServer: true,
+  });
+  const stocks = res.map(({ stock }: { stock: Stock }) => stock);
 
   return (
     <>
@@ -31,11 +28,9 @@ export default function Recent({ userId }: { userId: UUID }) {
           {t('Home.interest')}
         </div>
         <div className="flex flex-col items-center bg-[#FFFFFF] rounded-2xl mt-6 min-w-[590px] min-h-[374px] ">
-          {stock &&
-          typeof stock?.length === 'number' &&
-          stock?.length > 0 ? (
+          {stocks.length ? (
             <div className="mt-8">
-              <FavoriteItem stocks={stock} />
+              <FavoriteItem stocks={stocks} />
             </div>
           ) : (
             <div className="flex flex-col pt-20 mt-8">

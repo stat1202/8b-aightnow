@@ -9,6 +9,16 @@ import SkeletonTodayPopularNews from '@/components/skeleton/news/SkeletonTodayPo
 import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
 
+export const experimental_ppr = true;
+
+export async function generateStaticParams() {
+  const locales = ['en', 'fr', 'ja', 'ko', 'zh'];
+
+  return locales.map((locale) => ({
+    locale,
+  }));
+}
+
 export default async function News() {
   const t = await getTranslations('News');
   return (
