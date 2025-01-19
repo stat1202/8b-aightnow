@@ -16,7 +16,6 @@ export default async function FavoriteMain({
     userId: userId as UUID,
     page: 1,
     size: 4,
-    // next: { revalidate: 0 },
     isServer: true,
   });
   const stocks = res.map(({ stock }: { stock: Stock }) => stock);

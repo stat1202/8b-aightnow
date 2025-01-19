@@ -176,9 +176,19 @@ export default class AightnowClient {
   }
 
   // 관심종목과 관련된 뉴스 불러오기
-  async getRelatedNewsToInterestStock({ userId }: { userId: UUID }) {
+  async getRelatedNewsToInterestStock({
+    userId,
+    next,
+  }: {
+    userId: UUID;
+    next?: any;
+  }) {
     const nextURL = `/api/news/related/stock?user=${userId}`;
-    return this.httpClient.get({ url: nextURL, isServer: true });
+    return this.httpClient.get({
+      url: nextURL,
+      isServer: true,
+      next,
+    });
   }
 
   // 주요뉴스 불러오기

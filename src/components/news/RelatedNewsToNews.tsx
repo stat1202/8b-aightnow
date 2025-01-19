@@ -16,6 +16,7 @@ export default async function RelatedNewsToNews({
   const { newsList }: { newsList: News[] } = await (
     await fetch(
       `${process.env.NEXTAUTH_URL}/api/news/related/news/${id}`,
+      { next: { revalidate: 86400 } },
     )
   ).json();
   const locale = (await getLocale()) as Locale;
