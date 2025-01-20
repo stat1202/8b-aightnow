@@ -7,7 +7,6 @@ import SkeletonWrapper from '../skeleton/shared/SkeletonWrapper';
  */
 export default function ShowingInterest({
   stocks,
-  isLoading,
   handleDeleteInterest,
 }: {
   stocks: Array<any>;
@@ -24,13 +23,6 @@ export default function ShowingInterest({
           />
         </Chart>
       ))}
-      {isLoading && (
-        <>
-          <SkeletonWrapper className="w-[392px] h-[385px] pb-4 flex justify-center items-center" />
-          <SkeletonWrapper className="w-[392px] h-[385px] pb-4 flex justify-center items-center" />
-          <SkeletonWrapper className="w-[392px] h-[385px] pb-4 flex justify-center items-center" />
-        </>
-      )}
     </section>
   );
 }

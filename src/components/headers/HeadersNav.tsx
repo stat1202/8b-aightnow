@@ -11,7 +11,7 @@ export default async function HeadersNav() {
     <>
       <div className="w-full h-[80px] flex justify-center bg-[#FFFFFF] fixed top-0 left-0 z-50">
         <div className="w-[1200px] flex items-center justify-center">
-          <Link href="/home">
+          <Link href="/home" prefetch={true}>
             <Logo />
           </Link>
 
@@ -20,6 +20,7 @@ export default async function HeadersNav() {
               <Link
                 href="/search"
                 className="hover:underline hover:scale-110"
+                prefetch={true}
               >
                 {t('search')}
               </Link>
@@ -28,6 +29,7 @@ export default async function HeadersNav() {
               <Link
                 href="/news"
                 className="hover:underline hover:scale-110"
+                prefetch={true}
               >
                 {t('news')}
               </Link>
@@ -36,6 +38,7 @@ export default async function HeadersNav() {
               <Link
                 href="/stock"
                 className="hover:underline hover:scale-110"
+                prefetch={true}
               >
                 {t('stock')}
               </Link>
@@ -44,6 +47,7 @@ export default async function HeadersNav() {
               <Link
                 href="/stock/interest"
                 className="hover:underline hover:scale-110"
+                prefetch={true}
               >
                 {t('interest')}
               </Link>
@@ -52,6 +56,7 @@ export default async function HeadersNav() {
               <Link
                 href="/user"
                 className="hover:underline hover:scale-110"
+                prefetch={true}
               >
                 {t('my')}
               </Link>
