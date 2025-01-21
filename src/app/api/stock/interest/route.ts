@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -25,6 +26,10 @@ export async function POST(req: NextRequest) {
       .single();
   };
   const response = isExist ? data : await addInterest();
+
+  if (!isExist) {
+    revalidatePath('/[locale]/home', 'page');
+  }
 
   return NextResponse.json(response);
 }
@@ -61,5 +66,6 @@ export async function DELETE(req: NextRequest) {
     .eq('user_id', userId)
     .eq('stock_id', stockId);
 
+  revalidatePath('/[locale]/home', 'page');
   return NextResponse.json(status);
 }

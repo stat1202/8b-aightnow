@@ -6,10 +6,6 @@ import { auth as getSession } from '@/auth';
 import { UUID } from 'crypto';
 import IntlClientProvider from '@/components/shared/IntlClientProvider';
 
-export const dynamic = 'force-dynamic';
-export const fetchCache = 'force-no-store';
-export const revalidate = false;
-
 export default async function Home() {
   const authData = await getSession();
   const user = authData?.user;

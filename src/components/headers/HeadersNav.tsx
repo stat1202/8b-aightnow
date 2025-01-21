@@ -11,7 +11,7 @@ export default async function HeadersNav() {
     <>
       <div className="w-full h-[80px] flex justify-center bg-[#FFFFFF] fixed top-0 left-0 z-50">
         <div className="w-[1200px] flex items-center justify-center">
-          <Link href="/home" prefetch={true}>
+          <Link href="/home" prefetch={false}>
             <Logo />
           </Link>
 

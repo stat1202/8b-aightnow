@@ -168,11 +168,12 @@ export default function ChartSection({ stockId }: { stockId: UUID }) {
           <StockDescription stock={stock} language={language} />
         </Wrapper>
         <Chart width="min-w-[692px]">
-          <Chart.StockChartCard
+          <div></div>
+          {/* <Chart.StockChartCard
             as="h3"
             stockCode={stockCode}
             name={stockExchangeName}
-          />
+          /> */}
         </Chart>
       </div>
       <div className="flex justify-between box-border">

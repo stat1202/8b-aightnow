@@ -1,4 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
+import { revalidateTag } from 'next/cache';
 import { NextRequest } from 'next/server';
 
 export async function GET(requset: NextRequest) {
